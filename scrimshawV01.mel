@@ -1,0 +1,270 @@
+//shawnfratis@gmail.com
+//you will have to modify paths for your own use (where neccesary).
+ minimizeApp
+
+file -f -new;
+
+grid -toggle on;
+
+grid -spacing 5 -d 5;
+
+
+ToggleFrameRate;
+
+    string $window = `window`;
+    string $form = `formLayout`;
+    string $editor = `modelEditor`;
+    string $column = `columnLayout -adjustableColumn true`;
+
+    //string $pork = `source "crap/goatscrim/scrimshaw/goatv02.mel"`;
+
+//button -label "nut"
+    	//-command ("$pork");    
+  
+
+button -label "Poly Cube"
+    	-command ("polyCube");
+
+button -label "Poly Sphere"
+    	-command ("polySphere");
+
+button -label "Poly Cylinder"
+    	-command ("polyCylinder");
+
+button -label "Poly Cone"
+    	-command ("polyCone");
+
+button -label "Poly Plane"
+    	-command ("polyPlane");
+
+button -label "Extrude Face"
+    	-command ("ExtrudeFace");
+
+button -label "Duplicate"
+    	-command ("duplicate");
+
+button -label "Group"
+    	-command ("group");
+
+button -label "Point Light"
+    	-command ("pointLight");
+
+button -label "Ambient Light"
+    	-command ("ambientLight");
+
+button -label "New Camera"
+    	-command ("CreateCameraOnly");
+
+button -label "Look Thru"
+    	-command ("lookThru camera2");
+
+button -label "Render Window"
+    	-command ("RenderViewWindow");
+
+button -label "Render Globals"
+    	-command ("RenderGlobalsWindow");
+
+button -label "Preferences"
+    	-command ("PreferencesWindow");
+
+button -label "Graph Editor"
+    	-command ("GraphEditor");
+
+button -label "Keyframe"
+    	-command ("SetKey");
+
+button -label "Save"
+    	-command ("SaveScene");
+
+button -label "Save As"
+    	-command ("SaveSceneAs");
+
+    button -label "Open Scene"
+    	-command ("OpenScene");
+
+//button -label "Help"
+    	//-command ("SaveScene");
+
+//button -label "Info"
+    	//-command ("showWindow $duck;");
+  
+    button -label "Wireframe"
+    	-command ("modelEditor -edit -displayAppearance wireframe $editor");
+    button -label "Points"
+    	-command ("modelEditor -edit -displayAppearance points $editor");
+    button -label "Bounding Box"
+    	-command ("modelEditor -edit -displayAppearance boundingBox $editor");
+    button -label "Smooth Shaded"
+    	-command ("modelEditor -edit -displayAppearance smoothShaded $editor");
+    button -label "Flat Shaded"
+    	-command ("modelEditor -edit -displayAppearance flatShaded $editor");
+
+ button -label "Hypershade"
+    	-command ("HypershadeWindow");
+
+    button -label "Script Editor"
+    	-command ("ScriptEditor");
+
+ button -label "Outliner"
+    	-command ("outlinerPanel");
+
+      button -label "Attribute Editor"
+    	-command ("ToggleAttributeEditor");
+
+ button -label "Channel Box"
+    	-command ("channelBox");
+
+//button -label "Goat"
+    	//-command ("$pork");
+
+ button -label "Die"
+    	-command ("quit");
+    
+    formLayout -edit
+    	-attachForm    $column "top"    0
+    	-attachForm    $column "left"   0
+    	-attachNone    $column "bottom"
+    	-attachNone    $column "right"
+    	-attachForm    $editor "top"    0
+    	-attachControl $editor "left"   0 $column
+    	-attachForm    $editor "bottom" 0
+    	-attachForm    $editor "right"  0
+    	$form;
+    
+    string $camera[] = `camera -centerOfInterest 2.450351
+    	-position 1.535314 1.135712 1.535314
+    	-rotation -27.612504 45 0
+    	-worldUp -0.1290301 0.3488592 -0.1290301`;
+    
+    modelEditor -edit -camera $camera[0] $editor;
+   
+
+    showWindow $window;
+
+    if (`window -exists MEL`) deleteUI -window MEL;
+    
+    window -widthHeight 300 300 MEL;
+    string $form = `formLayout`;
+    string $cmdShell = `cmdShell`;
+    string $clearButton = `button -label "Clear"
+    	-command ("cmdShell -edit -clear $cmdShell")`;
+    string $closeButton = `button -label "Close"
+    	-command ("deleteUI -window MEL")`;
+    
+    formLayout -edit
+    	-attachForm     $cmdShell    "top"    0
+    	-attachForm     $cmdShell    "left"   0
+    	-attachControl  $cmdShell    "bottom" 0 $clearButton
+    	-attachForm     $cmdShell    "right"  0
+
+    	-attachNone     $clearButton "top"
+    	-attachForm     $clearButton "left"   0
+    	-attachForm     $clearButton "bottom" 0
+    	-attachPosition $clearButton "right"  0 50
+
+    	-attachNone     $closeButton "top"
+    	-attachPosition $closeButton "left"   0 50
+    	-attachForm     $closeButton "bottom" 0
+    	-attachForm     $closeButton "right"  0
+    	$form;
+
+showWindow;
+
+window;
+   columnLayout r;
+  timePort myTimePort;
+
+ //button -label "Channel Box"
+    	//-command ("channelBox");
+
+   //showWindow;
+   //timePort -e -snap off myTimePort;
+
+showWindow;
+
+//string $duck = `window`;
+
+//showWindow window;
+
+window -widthHeight 600 600 SCRIMSHAW;
+columnLayout -adjustableColumn true;
+
+text" Welcome to SCRIMSHAW!";
+text" Scrimshaw is a 3D modeling/animation";
+text" program utilizing Maya's architecture.";
+text" Many commands and tools are like Maya's, but with a simpler UI.";
+text" Here are a few MEL commands that are helpful:";
+text" polyCube -sx 10 -sy 15 -sz 5 -h 20";
+text" result is a 20 units height rectangular box";
+text" with 10 subdivisions along X, 15 along Y and 20 along Z.";
+text" polyCube -sx 5 -sy 5 -sz 5";
+text" result has 5 subdivisions along all directions, default size";
+text" Query the width of a cube:";
+text" float $w = `polyCube -q -w polyCube1`";
+text" ";
+
+text" Want more MEL commands? Click here:";
+
+text" ";
+
+button -label "MEL CommandReference"
+    	-command ("help -doc"); 
+
+
+text" ";
+text" ";
+text" ";
+text" ";
+ button -label "Close"
+    	-command ("deleteUI -window SCRIMSHAW"); 
+
+showWindow;
+
+
+//string $object[] = `polySphere`;
+
+//delete polySphere
+
+//button -l "Polything" -c "polySphere" myButton3;
+//string $object[] = `polyCube`;
+
+//button -l "Script Editor" -c "ScriptEditor" myButton5;
+//button -l "Open Scene" -c "OpenScene" myButton6;
+//button -l "Attribute Editor" -c "AttributeEditor" myButton7;
+//button -l "Channel Box" -c "channelBox" myButton8;
+//button -l "Halo Type 2" -c "setAttr opticalFX1.haloType 2" myButton9;
+//button -l "Halo Type 3" -c "setAttr opticalFX1.haloType 3" myButton10;
+//button -l "Halo Type 4" -c "setAttr opticalFX1.haloType 4" myButton11;
+//button -l "Halo Type 5" -c "setAttr opticalFX1.haloType 5" myButton12;
+
+//button -l "Lens Flare ON" -c "setAttr opticalFX1.lensFlare 1" myButton1;
+//button -l "Lens Flare OFF" -c "setAttr opticalFX1.lensFlare 0" myButton2;
+
+//string $object[] = `sphere`;
+//string $window = `window -title "attrFieldGrp Example"`;
+//columnLayout;
+//attrFieldGrp -attribute ($object[0] + ".translate");
+//attrFieldGrp -attribute ($object[0] + ".rotate");
+//attrFieldGrp -attribute ($object[0] + ".scale");
+//showWindow;
+
+showWindow MyWindow;
+
+//string $object[] = `sphere`;
+//string $window = `window -title "attrFieldGrp Example"`;
+//columnLayout;
+//attrFieldGrp -attribute ($object[0] + ".translate");
+//showWindow;
+
+//attrFieldSliderGrp -l "Move X" -min 0 -max 10 -at ("light1.tx") theSliderGroup1;
+
+        //attrFieldSliderGrp -l "Move Y" -min 0 -max 10 -at ("light1.ty") theSliderGroup2;
+
+	//rowColumnLayout -nc 1 -cw 1 400;
+
+
+
+
+
+
+
